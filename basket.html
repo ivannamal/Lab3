@@ -1,12 +1,95 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Корзина покупок</title>
-  <meta name="viewport" content="width=device‑width, height=device‑height, initial‑scale=1.0, maximum‑scale=1.0, minimum‑scale=1.0, user‑scalable=no">
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Магазин</title>
 </head>
 <body>
+<div class="main">
+    <div class="list">
+            <div class="search-container">
+                <input type="search" class="search-input" placeholder="Назва товару">
+                <button class="search-button tooltip" data-tooptip="Продукт">Додати</button>
+            </div>
+            <hr>
 
+            <div class="product-container">
+                <input class = "name" type="text" value="Помідори" style="text-decoration: line-through"/>
+                <div class="quantity">
+        <span class="product-item1">
+		  2
+        </span>
+                </div>
+                <div class="bought">
+                    <button class="btn tooltip" data-tooptip="Купити?">Не куплено </button>
+                </div>
+            </div>
+            <hr>
+            <div class="product-container">
+                <input class = "name" type="text" value="Печиво"/>
+                <div class="quantity">
+                    <button class="minus tooltip" data-tooptip="Зменшити" > - </button>
+                    <span class="product-item1">
+		        2
+            </span>
+                    <button class="plus tooltip" data-tooptip="Збільшити"> + </button>
+                </div>
+                <div class="bought">
+                    <button class="btn tooltip" data-tooptip="Придбано">Куплено </button>
+                    <button class="cross tooltip" data-tooptip="Викласти?" > x </button>
+                </div>
+            </div>
+            <hr>
+            <div class="product-container">
+                <input class = "name" type="text" value="Сир">
+                <div class="quantity">
+                    <button id="bleak" class="minus tooltip" data-tooptip="Зменшити"> - </button>
+                    <span class="product-item1">
+		          1
+              </span>
+                    <button  class="plus tooltip" data-tooptip="Збільшити" > + </button>
+                </div>
+                <div class="bought">
+                    <button class="btn tooltip" data-tooptip="Придбано">Куплено </button>
+                    <button class="cross tooltip" data-tooptip="Викласти?" > x </button>
+                </div>
+            </div>
+    </div>
+
+
+
+    <div class="Basket">
+        <div class="box">
+            <h2>Залишилося</h2>
+            <hr>
+            <div class="cookieNcheese">
+  <span class="product-item">
+		Печиво
+		<span class="amount">2</span>
+	</span>
+                <span class="product-item">
+		Сир
+		<span class="amount">1</span>
+	</span>
+            </div>
+            <hr>
+            <h2>Куплено</h2>
+            <hr>
+            <span class="product-item">
+  <del>Помідори</del>
+		<span class="amount">2</span>
+	</span>
+        </div>
+    </div>
+</div>
+
+<div class="badge">
+    <label class="print-name">Created by:</label>
+    <label class="author">Ivanna Malashchuk</label>
+</div>
+
+<script src="index.js"></script>
 </body>
 </html>
