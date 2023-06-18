@@ -121,7 +121,7 @@
 }
 html {background-color: darkgrey}
 
-.search-container {
+.search {
     display: flex;
     align-items: center;
 

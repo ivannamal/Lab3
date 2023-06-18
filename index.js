@@ -34,6 +34,7 @@ items.sort((a,b) => a.order-b.order).forEach(a => {
 let previousName;
 
 function addItem(product, count){
+
     const section = document.createElement("section");
     section.appendChild(document.createElement("hr"));
     const sectionElement = document.createElement("section");
