@@ -14,8 +14,77 @@
     background-color: rgba(0, 0, 0, 0);
     font-size: 20px;
 }
+.tooltip::before {
 
-.btn{
+}
+button {
+    position: relative;
+}
+
+button::before {
+    padding: 0px 10px;
+    height: 1px;
+    border-radius: 10px;
+    content:attr(data-tooltip);
+    font-size: 12px;
+    background-color: #af01da;
+    color: black;
+    transition: all 1s ease-out;
+    position: absolute;
+    top: -20%;
+    visibility: hidden;
+    /* z-index: -1; */
+    opacity: 0;
+    transform: translateX(-35%);
+}
+button:hover::before{
+    height: 15px;
+    padding: 10px;
+    visibility: visible;
+    /* z-index: 7; */
+    opacity: 1;
+    top: -135%;
+}
+/*.button:hover::after {*/
+/*    opacity: 1;*/
+/*    visibility: visible;*/
+/*    transition: all 0.3s;*/
+/*}*/
+.buy {
+    display: flex;
+    width: 170px;
+    justify-content: end;
+}
+.good {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 5px;
+    color: rgb(85, 92, 104);
+    background-color:rgb(226, 223, 223);
+}
+.number {
+    justify-content: center;
+    padding: 5px;
+    height: 15px;
+    width: 15px;
+    margin-left: 3px;
+    border-radius: 50%;
+    background-color: rgb(235, 159, 28);
+    text-align: center;
+    color: white;
+}
+
+.bought, .not-bought {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 45px;
+}
+.state {
     font-size: 20px;
     padding: 0.2em 1em;
     color: #3f3939;
@@ -26,11 +95,16 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.btn:hover{
+.label {
+    font-size: 25px;
+}
+.state:hover{
     transform: translateY(-3px);
     background-color: #3f3939;
     color: aliceblue;
 }
+
+/*cross*/
 .cross{
     box-shadow: 0 4px 8px rgba(0, 0, 1, 0.7);
     background-color: #D02A4BFF;
@@ -39,19 +113,18 @@
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
-
     width: 30px;
     min-height: 30px;
 }
+
+/*badge*/
 .badge{
     margin: 0;
     font-size: 1rem;
     position: fixed;
-
     bottom: -60px;
     left: 50px;
     z-index: 3;
-
     background-color: #7300ff;
     color: white;
     padding: 20px 40px;
@@ -80,53 +153,24 @@
     background-color: blue;
     color: aliceblue;
 }
-@media print{
-    .badge::before{
-        content: "";
-    }
 
-    .badge {
-        border: 1px solid #af01da;
-        background-color: white;
-        color: black;
-        bottom: 0px;
-    }
-}
-
-.product-item {
-    background-color: #e8e4e4;
-    display: inline-block;
-    height: 25px;
-    padding: 5px;
-    border-radius: 5px;
-}
-
+/*amount on the left*/
 .amount {
-    background-color: orange;
-    color: white;
-    border-radius: 10px;
-    display: inline-block;
-    height: 20px;
+    padding: 8px;
+    margin: 2px;
     width: 20px;
-    text-align: center;
-}
-.product-item1{
-    background-color: #e8e4e4;
-    display: inline-block;
-    height: 10px;
-
-    padding: 15px;
+    height: 20px;
+    background-color:  rgb(226, 223, 223);
     border-radius: 5px;
-    justify-content: center;
+    text-align: center;
+    color:rgb(85, 92, 104);
 }
-html {background-color: darkgrey}
 
+html {background-color: darkgrey}
 .search {
     display: flex;
     align-items: center;
-
 }
-
 .search-input {
     margin: 0;
     flex: 1;
@@ -136,7 +180,6 @@ html {background-color: darkgrey}
     font-size: 14px;
     outline: none;
 }
-
 .search-button {
     margin: 0;
     font-size: 1.5rem;
@@ -148,8 +191,8 @@ html {background-color: darkgrey}
     font-size: 14px;
     cursor: pointer;
 }
-.product-container{
 
+.product-container{
     display: flex;
     border: gray;
     flex-wrap: wrap;
@@ -157,6 +200,7 @@ html {background-color: darkgrey}
     align-content: center;
     align-items: center;
 }
+
 .list{
     order:1;
     padding: 10px;
@@ -169,7 +213,7 @@ html {background-color: darkgrey}
     align-content: center;
     align-items: center;
 }
-.Basket{
+.status{
 
     order: 2;
     border-radius: 15px;
@@ -181,16 +225,14 @@ html {background-color: darkgrey}
     align-content: center;
     align-items: center;
 }
+
 .main{
     display: flex;
     margin: 0 auto;
     padding: 5px;
     width: 1175px;
-
 }
-.bought{
-    margin: 0;
-}
+/*plus, minus*/
 .plus{
     background-color: green;
     border: none;
@@ -209,54 +251,42 @@ html {background-color: darkgrey}
     color: white;
     width: 30px;
     min-height: 30px;
+}
 
-}
-.quantity{
-    margin: 0;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
 input{
     margin: 0;
     width: 7%;
     height: 100%;
 }
-
-.product-item{
-    margin: 4% 1%;
-}
 body{
     font-family: Arial, 'Helvetica Neue', sans-serif;
 }
-#bleak{
-    background-color: #fe8672;
-}
 
-.tooltip {
-    position: relative;
-}
+/*tooltips(comment)*/
+/*.tooltip {*/
+/*    position: relative;*/
+/*}*/
 
-.tooltip::after {
-    content: attr(data-tooptip);
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px;
-    background-color: blueviolet;
-    border-radius: 22px;
-    color: white;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
-}
+/*.tooltip::after {*/
+/*    content: attr(data-tooptip);*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    padding: 5px;*/
+/*    background-color: blueviolet;*/
+/*    border-radius: 22px;*/
+/*    color: white;*/
+/*    opacity: 0;*/
+/*    visibility: hidden;*/
+/*    transition: all 0.3s;*/
+/*}*/
 
-.tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transition: all 0.3s;
-}
+/*.tooltip:hover::after {*/
+/*    opacity: 1;*/
+/*    visibility: visible;*/
+/*    transition: all 0.3s;*/
+/*}*/
 
 @media (max-width:1175px){
     .all {
@@ -265,7 +295,7 @@ body{
         transform: translateX(-6px);
     }
 
-    .Basket {
+    .status {
         margin-left: 1vw;
     }
 
@@ -281,7 +311,7 @@ body{
         margin-right: 100px;
     }
 
-    .list, .Basket {
+    .list, .status {
         width: 95vw;
         margin: 10px;
     }

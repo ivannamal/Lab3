@@ -34,7 +34,7 @@ items.sort((a,b) => a.order-b.order).forEach(a => {
 let previousName;
 
 function addItem(product, count){
-
+    //bhjbhjb
     const section = document.createElement("section");
     section.appendChild(document.createElement("hr"));
     const sectionElement = document.createElement("section");
@@ -176,14 +176,14 @@ function deleteItem(item){
 
 
 function reduceItem(amount){
-    amount.querySelector(".quantity").textContent = +amount.querySelector(".quantity").textContent - 1;
-    if(+amount.querySelector(".quantity").textContent === 1){
+    amount.querySelector(".amount").textContent = +amount.querySelector(".amount").textContent - 1;
+    if(+amount.querySelector(".amount").textContent === 1){
         amount.querySelector(".minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
     }
     let name = amount.parentElement.querySelector(".name").value;
     for(const item of items){
         if(item.name === name){
-            item.count = +amount.querySelector(".quantity").textContent;
+            item.count = +amount.querySelector(".amount").textContent;
         }
     }
     for(const good of document.querySelectorAll(".not-bought span")){
@@ -195,14 +195,14 @@ function reduceItem(amount){
 }
 
 function plusItem(amount){
-    amount.querySelector(".quantity").innerHTML = +amount.querySelector(".quantity").innerHTML + 1;
-    if(+amount.querySelector(".quantity").innerHTML === 2){
+    amount.querySelector(".amount").innerHTML = +amount.querySelector(".amount").innerHTML + 1;
+    if(+amount.querySelector(".amount").innerHTML === 2){
         amount.querySelector(".minus").removeAttribute("style");
     }
     let name = amount.parentElement.querySelector(".name").value;
     for(const item of items){
         if(item.name === name){
-            item.count = +amount.querySelector(".quantity").textContent;
+            item.count = +amount.querySelector(".amount").textContent;
         }
     }
     for(const good of document.querySelectorAll(".not-bought span")){
