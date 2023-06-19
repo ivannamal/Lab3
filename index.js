@@ -1,40 +1,6 @@
-if(localStorage.length === 0){
-    localStorage.setItem("0;Помідори;Не куплено", 1);
-    localStorage.setItem("1;Печиво;Не куплено", 1);
-    localStorage.setItem("2;Сир;Не куплено", 1);
-}
-let items = [];
-
-for(let i=0; i<localStorage.length; i++){
-    let name = localStorage.key(i);
-    let count = localStorage.getItem(name);
-    let bought;
-    if(name.split(";")[2]==="Куплено"){
-        bought = true;
-    }else{
-        bought = false;
-    }
-    let order = name.split(";")[0];
-    name = name.split(";")[1];
-    items.push({
-        name,
-        count,
-        bought,
-        order
-    });
-}
-
-items.sort((a,b) => a.order-b.order).forEach(a => {
-    let section = addItem(a.name, a.count);
-    if(a.bought){
-        buyItem(section);
-    }});
-
-
 let previousName;
 
 function addItem(product, count){
-    //bhjbhjb
     const section = document.createElement("section");
     section.appendChild(document.createElement("hr"));
     const sectionElement = document.createElement("section");
@@ -123,13 +89,6 @@ function add() {
         }
         if(!exist){
             addItem(name, 1);
-            let good = {
-                name: name,
-                count: 1,
-                bought: false,
-                order: items.length
-            }
-            items.push(good);
         }
     }
     input.value = "";
@@ -149,11 +108,6 @@ function changeName(field){
             for(const good of document.querySelectorAll(".not-bought span")){
                 if(previousName === good.childNodes[0].textContent){
                     good.childNodes[0].textContent = field.value;
-                    for(const item of items){
-                        if(item.name == previousName){
-                            item.name = field.value;
-                        }
-                    }
                 }
             }
         }
@@ -165,8 +119,7 @@ function changeName(field){
 function deleteItem(item){
     item.remove();
     let name = item.querySelector(".name").value;
-    const index = items.indexOf(items.filter((o) => o.name === name)[0]);
-    items.splice(index, 1);
+
     for(const good of document.querySelectorAll(".not-bought span")){
         if(name === good.childNodes[0].textContent){
             good.remove();
@@ -181,11 +134,7 @@ function reduceItem(amount){
         amount.querySelector(".minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
     }
     let name = amount.parentElement.querySelector(".name").value;
-    for(const item of items){
-        if(item.name === name){
-            item.count = +amount.querySelector(".amount").textContent;
-        }
-    }
+
     for(const good of document.querySelectorAll(".not-bought span")){
         if(name === good.childNodes[0].textContent){
             good.childNodes[1].textContent = +good.childNodes[1].textContent-1;
@@ -200,11 +149,7 @@ function plusItem(amount){
         amount.querySelector(".minus").removeAttribute("style");
     }
     let name = amount.parentElement.querySelector(".name").value;
-    for(const item of items){
-        if(item.name === name){
-            item.count = +amount.querySelector(".amount").textContent;
-        }
-    }
+
     for(const good of document.querySelectorAll(".not-bought span")){
         if(name === good.childNodes[0].textContent){
             good.childNodes[1].textContent = +good.childNodes[1].textContent+1;
@@ -226,11 +171,7 @@ function buyItem(section){
     section.querySelector(".add .minus").setAttribute("style", "visibility: hidden");
     section.querySelector(".add .plus").setAttribute("style", "visibility: hidden");
     let name = section.querySelector(".name").value;
-    for(const good of items){
-        if(good.name === name){
-            good.bought = true;
-        }
-    }
+
     let item;
     for(const good of document.querySelectorAll(".not-bought span")){
         if(name === good.childNodes[0].textContent){
@@ -260,11 +201,7 @@ function unbuyItem(section){
     }
     section.querySelector(".add .plus").removeAttribute("style");
     let name = section.querySelector(".name").value;
-    for(const good of items){
-        if(good.name === name){
-            good.bought = false;
-        }
-    }
+
     let item;
     for(const good of document.querySelectorAll(".bought span")){
         if(name === good.childNodes[0].textContent){
@@ -277,16 +214,9 @@ function unbuyItem(section){
     item.querySelector("span").removeAttribute("style");
 }
 
-window.onbeforeunload = function(){
-    localStorage.clear();
-    for(let i=0; i<items.length; i++){
-        if(items[i].bought){
-            localStorage.setItem(i+";"+items[i].name+";Куплено", items[i].count);
-        }else{
-            localStorage.setItem(i+";"+items[i].name+";Не куплено", items[i].count);
-        }
-    }
-}
+addItem("Помідори",1);
+addItem("Печиво",1);
+addItem("Сир",1);
 
 
 
