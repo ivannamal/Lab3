@@ -43,13 +43,13 @@ function addItem(product, count){
     buySection.classList.add("buy");
     const buyButton = document.createElement("button");
     buyButton.classList.add("state");
-    buyButton.setAttribute("data-tooltip", "Товар куплено");
+    buyButton.setAttribute("data-tooltip", "Придбано");
     buyButton.innerHTML = "Куплено";
     buyButton.addEventListener("click", () => {buyItem(sectionElement)});
     buySection.appendChild(buyButton);
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("cross");
-    deleteButton.setAttribute("data-tooltip", "Видалити товар");
+    deleteButton.setAttribute("data-tooltip", "Видалити");
     deleteButton.innerHTML = "×";
     deleteButton.addEventListener("click", () => {deleteItem(section)});
     buySection.appendChild(deleteButton);
@@ -162,7 +162,7 @@ function buyItem(section){
     const button = document.createElement("button");
     button.classList.add("state");
     button.classList.add("tooltip");
-    button.setAttribute("data-tooltip", "Товар не куплено");
+    button.setAttribute("data-tooltip", "Купити?");
     button.textContent = "Не куплено";
     button.addEventListener("click", () => {unbuyItem(section)});
     section.querySelector(".buy").appendChild(button);
@@ -188,7 +188,7 @@ function unbuyItem(section){
     section.querySelector(".buy .state").remove();
     const button = document.createElement("button");
     button.classList.add("state");
-    button.setAttribute("data-tooltip", "Товар куплено");
+    button.setAttribute("data-tooltip", "Придбано");
     button.textContent = "Куплено";
     button.addEventListener("click", () => {buyItem(section)});
     section.querySelector(".buy").insertBefore(button, section.querySelector(".buy .cross"));
