@@ -36,7 +36,7 @@ function addItem(product, count){
     plusButton.classList.add("plus");
     plusButton.innerHTML = "+";
     plusButton.setAttribute("data-tooltip", "Збільшити");
-    plusButton.addEventListener("click", () => {plusItem(sectionElement.querySelector(".add"))});
+    plusButton.addEventListener("click", () => {plusItem(sectionElement)});
     addSection.appendChild(plusButton);
     sectionElement.appendChild(addSection);
     const buySection = document.createElement("section");
@@ -82,7 +82,7 @@ function add() {
         for(const good of document.querySelectorAll(".list .item .name")){
             if(good.value.toLowerCase() === name.toLowerCase()){
                 if(good.style.textDecoration === ""){
-                    plusItem(good.parentElement.querySelector(".add"));
+                    plusItem(good.parentElement);
                 }
                 exist = true;
             }
@@ -214,8 +214,8 @@ function unbuyItem(section){
     item.querySelector("span").removeAttribute("style");
 }
 
-addItem("Помідори",1);
-addItem("Печиво",1);
+addItem("Помідори",2);
+addItem("Печиво",2);
 addItem("Сир",1);
 
 
