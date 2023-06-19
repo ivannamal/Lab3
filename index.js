@@ -168,8 +168,8 @@ function buyItem(section){
     section.querySelector(".buy").appendChild(button);
     section.querySelector(".buy .cross").setAttribute("style", "display:none");
     section.querySelector(".name").setAttribute("style", "text-decoration: line-through; pointer-events:none");
-    section.querySelector(".add .minus").setAttribute("style", "visibility: hidden");
-    section.querySelector(".add .plus").setAttribute("style", "visibility: hidden");
+    section.querySelector(".minus").setAttribute("style", "visibility: hidden");
+    section.querySelector(".plus").setAttribute("style", "visibility: hidden");
     let name = section.querySelector(".name").value;
 
     let item;
@@ -194,12 +194,12 @@ function unbuyItem(section){
     section.querySelector(".buy").insertBefore(button, section.querySelector(".buy .cross"));
     section.querySelector(".buy .cross").removeAttribute("style");
     section.querySelector(".name").setAttribute("style", "pointer-events:all");
-    if(+section.querySelector(".add .amount").textContent === 1){
-        section.querySelector(".add .minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
+    if(+section.querySelector(" .amount").textContent === 1){
+        section.querySelector(".minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
     }else{
-        section.querySelector(".add .minus").removeAttribute("style");
+        section.querySelector(".minus").removeAttribute("style");
     }
-    section.querySelector(".add .plus").removeAttribute("style");
+    section.querySelector(".plus").removeAttribute("style");
     let name = section.querySelector(".name").value;
 
     let item;
