@@ -17,6 +17,11 @@
 .tooltip::before {
 
 }
+.buy {
+    display: flex;
+    width: 170px;
+    justify-content: end;
+}
 button {
     position: relative;
 }

@@ -1,6 +1,6 @@
-let previousName;
+let existantName;
 
-function addItem(product, count){
+function addItem(product, count) {
     const section = document.createElement("section");
     section.appendChild(document.createElement("hr"));
     const sectionElement = document.createElement("section");
@@ -10,10 +10,12 @@ function addItem(product, count){
     const inputField = document.createElement("input");
     inputField.classList.add("name");
     inputField.value = product;
-    inputField.addEventListener('focusin', function(){
-        previousName = inputField.value;
+    inputField.addEventListener('focusin', function () {
+        existantName = inputField.value;
     });
-    inputField.addEventListener("focusout", () => {changeName(inputField)});
+    inputField.addEventListener("focusout", () => {
+        changeName(inputField)
+    });
     sectionElement.appendChild(inputField);
     const addSection = document.createElement("section");
     addSection.classList.add("add");
@@ -21,10 +23,12 @@ function addItem(product, count){
     minusButton.classList.add("minus");
     minusButton.innerHTML = "-";
     minusButton.setAttribute("data-tooltip", "Зменшити");
-    minusButton.addEventListener("click", () => {reduceItem(sectionElement.querySelector(".add"))});
-    if(count == 1){
+    minusButton.addEventListener("click", () => {
+        minusItem(sectionElement.querySelector(".add"))
+    });
+    if (count == 1) {
         minusButton.setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
-    }else{
+    } else {
         minusButton.setAttribute("style", "pointer-events:all");
     }
     addSection.appendChild(minusButton);
@@ -36,7 +40,9 @@ function addItem(product, count){
     plusButton.classList.add("plus");
     plusButton.innerHTML = "+";
     plusButton.setAttribute("data-tooltip", "Збільшити");
-    plusButton.addEventListener("click", () => {plusItem(sectionElement)});
+    plusButton.addEventListener("click", () => {
+        plusItem(sectionElement.querySelector(".add"))
+    });
     addSection.appendChild(plusButton);
     sectionElement.appendChild(addSection);
     const buySection = document.createElement("section");
@@ -45,13 +51,17 @@ function addItem(product, count){
     buyButton.classList.add("state");
     buyButton.setAttribute("data-tooltip", "Придбано");
     buyButton.innerHTML = "Куплено";
-    buyButton.addEventListener("click", () => {buyItem(sectionElement)});
+    buyButton.addEventListener("click", () => {
+        buyItem(sectionElement)
+    });
     buySection.appendChild(buyButton);
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("cross");
     deleteButton.setAttribute("data-tooltip", "Видалити");
     deleteButton.innerHTML = "×";
-    deleteButton.addEventListener("click", () => {deleteItem(section)});
+    deleteButton.addEventListener("click", () => {
+        deleteItem(section)
+    });
     buySection.appendChild(deleteButton);
     sectionElement.appendChild(buySection);
     const item = document.createElement("span");
@@ -62,7 +72,6 @@ function addItem(product, count){
     numberOfItem.innerHTML = count;
     item.appendChild(numberOfItem);
     document.querySelector(".not-bought").appendChild(item);
-    return sectionElement;
 }
 
 const submitButton = document.querySelector(".search-button");
@@ -76,95 +85,96 @@ input.addEventListener('keypress', function (e) {
 });
 
 function add() {
-    if(input.value.replace(/\s/g, "").length){
+    if (input.value.replace(/\s/g, "").length) {
         const name = input.value;
         let exist;
-        for(const good of document.querySelectorAll(".list .item .name")){
-            if(good.value.toLowerCase() === name.toLowerCase()){
-                if(good.style.textDecoration === ""){
+        for (const good of document.querySelectorAll(".item .name")) {
+            if (good.value.toLowerCase() === name.toLowerCase()) {
+                if (good.style.textDecoration === "") {
                     plusItem(good.parentElement);
                 }
                 exist = true;
             }
         }
-        if(!exist){
+        if (!exist) {
             addItem(name, 1);
         }
     }
     input.value = "";
 }
 
-function changeName(field){
-    if(field.value.replace(/\s/g, "").length){
+function changeName(field) {
+    if (field.value.replace(/\s/g, "").length) {
         let exist;
-        for(const good of document.querySelectorAll(".not-bought span")){
-            if(good.childNodes[0].textContent.toLowerCase() === field.value.toLowerCase()){
+        for (const good of document.querySelectorAll(".not-bought span")) {
+            if (good.childNodes[0].textContent.toLowerCase() === field.value.toLowerCase()) {
                 exist = true;
             }
         }
-        if(exist){
-            field.value = previousName;
-        }else{
-            for(const good of document.querySelectorAll(".not-bought span")){
-                if(previousName === good.childNodes[0].textContent){
+        if (exist) {
+            field.value = existantName;
+        } else {
+            for (const good of document.querySelectorAll(".not-bought span")) {
+                if (existantName === good.childNodes[0].textContent) {
                     good.childNodes[0].textContent = field.value;
                 }
             }
         }
-    }else{
-        field.value = previousName;
+    } else {
+        field.value = existantName;
     }
 }
 
-function deleteItem(item){
+function deleteItem(item) {
     item.remove();
     let name = item.querySelector(".name").value;
-
-    for(const good of document.querySelectorAll(".not-bought span")){
-        if(name === good.childNodes[0].textContent){
+    for (const good of document.querySelectorAll(".not-bought span")) {
+        if (name === good.childNodes[0].textContent) {
             good.remove();
         }
     }
 }
 
 
-function reduceItem(amount){
+function minusItem(amount) {
     amount.querySelector(".amount").textContent = +amount.querySelector(".amount").textContent - 1;
-    if(+amount.querySelector(".amount").textContent === 1){
+    if (+amount.querySelector(".amount").textContent === 1) {
         amount.querySelector(".minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
     }
     let name = amount.parentElement.querySelector(".name").value;
 
-    for(const good of document.querySelectorAll(".not-bought span")){
-        if(name === good.childNodes[0].textContent){
-            good.childNodes[1].textContent = +good.childNodes[1].textContent-1;
+    for (const good of document.querySelectorAll(".not-bought span")) {
+        if (name === good.childNodes[0].textContent) {
+            good.childNodes[1].textContent = +good.childNodes[1].textContent - 1;
         }
     }
 
 }
 
-function plusItem(amount){
+function plusItem(amount) {
     amount.querySelector(".amount").innerHTML = +amount.querySelector(".amount").innerHTML + 1;
-    if(+amount.querySelector(".amount").innerHTML === 2){
+    if (+amount.querySelector(".amount").innerHTML === 2) {
         amount.querySelector(".minus").removeAttribute("style");
     }
     let name = amount.parentElement.querySelector(".name").value;
 
-    for(const good of document.querySelectorAll(".not-bought span")){
-        if(name === good.childNodes[0].textContent){
-            good.childNodes[1].textContent = +good.childNodes[1].textContent+1;
+    for (const good of document.querySelectorAll(".not-bought span")) {
+        if (name === good.childNodes[0].textContent) {
+            good.childNodes[1].textContent = +good.childNodes[1].textContent + 1;
         }
     }
 }
 
-function buyItem(section){
+function buyItem(section) {
     section.querySelector(".buy .state").remove();
     const button = document.createElement("button");
     button.classList.add("state");
     button.classList.add("tooltip");
     button.setAttribute("data-tooltip", "Купити?");
     button.textContent = "Не куплено";
-    button.addEventListener("click", () => {unbuyItem(section)});
+    button.addEventListener("click", () => {
+        retrieveItem(section)
+    });
     section.querySelector(".buy").appendChild(button);
     section.querySelector(".buy .cross").setAttribute("style", "display:none");
     section.querySelector(".name").setAttribute("style", "text-decoration: line-through; pointer-events:none");
@@ -173,8 +183,8 @@ function buyItem(section){
     let name = section.querySelector(".name").value;
 
     let item;
-    for(const good of document.querySelectorAll(".not-bought span")){
-        if(name === good.childNodes[0].textContent){
+    for (const good of document.querySelectorAll(".not-bought span")) {
+        if (name === good.childNodes[0].textContent) {
             item = good;
             good.remove();
         }
@@ -184,27 +194,29 @@ function buyItem(section){
     item.querySelector("span").setAttribute("style", "text-decoration: line-through");
 }
 
-function unbuyItem(section){
+function retrieveItem(section) {
     section.querySelector(".buy .state").remove();
     const button = document.createElement("button");
     button.classList.add("state");
     button.setAttribute("data-tooltip", "Придбано");
     button.textContent = "Куплено";
-    button.addEventListener("click", () => {buyItem(section)});
+    button.addEventListener("click", () => {
+        buyItem(section)
+    });
     section.querySelector(".buy").insertBefore(button, section.querySelector(".buy .cross"));
     section.querySelector(".buy .cross").removeAttribute("style");
     section.querySelector(".name").setAttribute("style", "pointer-events:all");
-    if(+section.querySelector(" .amount").textContent === 1){
+    if (+section.querySelector(" .amount").textContent === 1) {
         section.querySelector(".minus").setAttribute("style", "background-color:#ef9f9e; border-bottom-color: #ed9392; pointer-events:none");
-    }else{
+    } else {
         section.querySelector(".minus").removeAttribute("style");
     }
     section.querySelector(".plus").removeAttribute("style");
     let name = section.querySelector(".name").value;
 
     let item;
-    for(const good of document.querySelectorAll(".bought span")){
-        if(name === good.childNodes[0].textContent){
+    for (const good of document.querySelectorAll(".bought span")) {
+        if (name === good.childNodes[0].textContent) {
             item = good;
             good.remove();
         }
@@ -214,9 +226,9 @@ function unbuyItem(section){
     item.querySelector("span").removeAttribute("style");
 }
 
-addItem("Помідори",2);
-addItem("Печиво",2);
-addItem("Сир",1);
+addItem("Помідори", 2);
+addItem("Печиво", 2);
+addItem("Сир", 1);
 
 
 
